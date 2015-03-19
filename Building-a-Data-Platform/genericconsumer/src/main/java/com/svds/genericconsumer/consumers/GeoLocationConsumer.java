@@ -23,7 +23,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import kafka.consumer.ConsumerIterator;
 import kafka.consumer.KafkaStream;
-import static org.apache.commons.codec.digest.DigestUtils.md5Hex;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.HBaseConfiguration;
 import org.apache.hadoop.hbase.client.HTable;
@@ -55,9 +54,9 @@ public class GeoLocationConsumer extends Consumer {
     }
 
     /**
-     * Initialize Consumer with Kafka stream. Requires parameters
-     *    zk=zookeeperQuorumServer
-     *    hbaseTable=tableName
+     * Initialize Consumer with Kafka stream. Requires parametersMap
+    zk=zookeeperQuorumServer
+    hbaseTable=tableName
      * 
      * @param stream        Message stream from Kafka
      * @param threadNumber  ID number of this thread
@@ -68,8 +67,8 @@ public class GeoLocationConsumer extends Consumer {
         super.init(stream, threadNumber, parameters);
 
         // get parameter arguments
-        String zooKeeperQuorum = this.parameters.get(ZOOKEEPER_QUORUM);
-        String hbaseTable = this.parameters.get(HBASE_TABLE);
+        String zooKeeperQuorum = this.parametersMap.get(ZOOKEEPER_QUORUM);
+        String hbaseTable = this.parametersMap.get(HBASE_TABLE);
 
         if (zooKeeperQuorum == null) {
             String error = MUST_DEFINE + ZOOKEEPER_QUORUM + "=zookeeperQuorumServer";

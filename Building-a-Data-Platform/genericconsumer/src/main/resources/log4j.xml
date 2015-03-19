@@ -7,9 +7,9 @@
             <param value="%d{yy/MM/dd HH:mm:ss} %p %C.%M: %m%n" name="ConversionPattern"/>
         </layout>
     </appender>
-    <appender class="org.apache.log4j.DailyRollingFileAppender" name="geolocationconsumer">
+    <appender class="org.apache.log4j.DailyRollingFileAppender" name="genericconsumer">
         <param value="'.'yyyy-MM-dd" name="DatePattern"/>
-        <param value="/var/tmp/geolocationconsumer.log" name="File"/>
+        <param value="/var/tmp/genericconsumer.log" name="File"/>
         <layout class="org.apache.log4j.PatternLayout">
 <!--             <param value="[%d{ISO8601}]%5p%6.6r[%t]%x(%F %C.%M:%L) - %m%n" name="ConversionPattern"/> -->
 			<param value="[%d{ISO8601}]%5p%6.6r[%t]%x - %m%n" name="ConversionPattern"/>
@@ -17,7 +17,7 @@
     </appender>
     <appender name="async" class="org.apache.log4j.AsyncAppender">
         <param name="BufferSize" value="500"/>
-        <appender-ref ref="geolocationconsumer"/>
+        <appender-ref ref="genericconsumer"/>
     </appender>
    
     <root>

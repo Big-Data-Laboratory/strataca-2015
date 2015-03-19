@@ -28,25 +28,25 @@ public abstract class Consumer implements Runnable {
     
     protected KafkaStream stream;
     protected int threadNumber;
-    protected Map<String,String> parameters;
+    protected Map<String,String> parametersMap;
     
     /**
-     * Initialize Consumer with Kafka stream and optional parameters
+     * Initialize Consumer with Kafka stream and optional parametersMap
      * 
      * @param stream        Message stream from Kafka
      * @param threadNumber  ID number of this thread
-     * @param parameters    Extra parameters to parse, in the form key=value
+     * @param parameters    Extra parametersMap to parse, in the form key=value
      */
     public void init(KafkaStream stream, int threadNumber, String[] parameters){
         this.threadNumber = threadNumber;
         this.stream = stream;
-        this.parameters = new HashMap<>();
+        this.parametersMap = new HashMap<>();
         
         LOG.info("threadNumber: " + this.threadNumber);
         for (String param : parameters) {
             try {
                 String[] keyval = param.split("=");
-                this.parameters.put(keyval[0], keyval[1]);
+                this.parametersMap.put(keyval[0], keyval[1]);
             } catch (Exception e) {
                 LOG.error("Could not parse param into key=val");
                 LOG.error(e.getMessage(),e);
